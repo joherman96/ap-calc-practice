@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Calc AB - Practice Test</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f5f5f7;
+    color: #1d1d1f;
+    line-height: 1.7;
+    padding: 20px;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  header {
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    color: white;
+    padding: 40px;
+    border-radius: 16px;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  header h1 {
+    font-size: 2.2em;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  header .subtitle {
+    font-size: 1.1em;
+    opacity: 0.85;
+  }
+
+  header .test-date {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-top: 12px;
+    font-weight: 600;
+  }
+
+  .section {
+    background: white;
+    border-radius: 14px;
+    padding: 32px 36px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+
+  .section h2 {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #0f3460;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #e8e8ed;
+  }
+
+  .section h3 {
+    font-size: 1.15em;
+    font-weight: 600;
+    color: #333;
+    margin-top: 22px;
+    margin-bottom: 10px;
+  }
+
+  .warmup-label {
+    display: inline-block;
+    background: #fff3e0;
+    color: #e65100;
+    font-weight: 700;
+    font-size: 0.8em;
+    padding: 3px 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .question {
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .question:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .q-number {
+    font-weight: 700;
+    color: #0f3460;
+    font-size: 1.05em;
+  }
+
+  .q-text {
+    margin: 8px 0 12px 0;
+    font-size: 1.05em;
+  }
+
+  .choices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 24px;
+    margin: 10px 0 10px 8px;
+  }
+
+  .choices .choice {
+    font-size: 1em;
+    padding: 2px 0;
+  }
+
+  .answer-btn {
+    background: #0f3460;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9em;
+    font-weight: 600;
+    margin-top: 8px;
+    transition: background 0.2s;
+  }
+
+  .answer-btn:hover {
+    background: #1a4a8a;
+  }
+
+  .answer-content {
+    display: none;
+    margin-top: 12px;
+    padding: 16px;
+    background: #f0faf0;
+    border-left: 4px solid #2e7d32;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.97em;
+  }
+
+  .answer-content.visible {
+    display: block;
+  }
+
+  .answer-content .correct-answer {
+    font-weight: 700;
+    color: #2e7d32;
+    font-size: 1.05em;
+    margin-bottom: 6px;
+  }
+
+  .fr-workspace {
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px 0;
+    min-height: 80px;
+    color: #aaa;
+    font-style: italic;
+    font-size: 0.9em;
+  }
+
+  .formula-ref {
+    background: #e8f5e9;
+    border: 1px solid #a5d6a7;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+  }
+
+  .formula-ref h3 {
+    color: #2e7d32;
+    margin-top: 0;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 0.75em;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 6px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  .tag-disk {
+    background: #e3f2fd;
+    color: #1565c0;
+  }
+
+  .tag-washer {
+    background: #fce4ec;
+    color: #c62828;
+  }
+
+  .tag-inv-trig {
+    background: #f3e5f5;
+    color: #6a1b9a;
+  }
+
+  .tag-table {
+    background: #fff8e1;
+    color: #f57f17;
+  }
+
+  .tag-integral {
+    background: #e0f2f1;
+    color: #00695c;
+  }
+
+  table.data-table {
+    border-collapse: collapse;
+    margin: 12px 0;
+  }
+
+  table.data-table th, table.data-table td {
+    border: 1px solid #ccc;
+    padding: 8px 18px;
+    text-align: center;
+    font-size: 1em;
+  }
+
+  table.data-table th {
+    background: #f0f4ff;
+    font-weight: 700;
+    color: #0f3460;
+  }
+
+  .part-header {
+    background: linear-gradient(90deg, #0f3460, #1a4a8a);
+    color: white;
+    padding: 14px 24px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+    font-weight: 700;
+  }
+
+  .score-box {
+    background: #f5f5f7;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .score-box input {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.8em;
+    font-weight: 700;
+    width: 60px;
+    text-align: center;
+    border: 2px solid #0f3460;
+    border-radius: 8px;
+    padding: 4px;
+    color: #0f3460;
+  }
+
+  .score-box span {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: #555;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>AP Calculus AB - Practice Test</h1>
+  <div class="subtitle">Inverse Functions, Inverse Trig Derivatives & Integrals, Disk/Washer Volumes</div>
+  <div class="test-date">Test Prep - March 2026</div>
+</header>
+
+<!-- ======================== PRE-TEST WARM-UP ======================== -->
+<div class="section">
+  <h2>Pre-Test Warm-Up</h2>
+  <div class="warmup-label">Not part of the test - just get your brain going</div>
+
+  <div class="question">
+    <div class="q-number">Warm-Up 1 <span class="tag tag-disk">Disk</span></div>
+    <div class="q-text">
+      The region bounded by y = x&sup2;, y = 0, and x = 2 is rotated about the x-axis. Find the volume of the resulting solid.
+    </div>
+    <div class="fr-workspace">Work it out here or on paper...</div>
+    <button class="answer-btn" onclick="toggle(this)">Show Answer</button>
+    <div class="answer-content">
+      <div class="correct-answer">V = 32&pi;/5</div>
+      <strong>Disk method</strong> &mdash; the region touches the x-axis, so no inner radius.<br><br>
+      V = &pi; &int;<sub>0</sub><sup>2</sup> (x&sup2;)&sup2; dx = &pi; &int;<sub>0</sub><sup>2</sup> x<sup>4</sup> dx<br><br>
+      = &pi; [x<sup>5</sup>/5]<sub>0</sub><sup>2</sup> = &pi;(32/5) = <strong>32&pi;/5</strong>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="q-number">Warm-Up 2 <span class="tag tag-washer">Washer</span></div>
+    <div class="q-text">
+      The region bounded by y = x and y = x&sup2; (from x = 0 to x = 1) is rotated about the x-axis. Find the volume.
+    </div>
+    <div class="fr-workspace">Work it out here or on paper...</div>
+    <button class="answer-btn" onclick="toggle(this)">Show Answer</button>
+    <div class="answer-content">
+      <div class="correct-answer">V = 2&pi;/15</div>
+      <strong>Washer method</strong> &mdash; gap between y = x&sup2; and the outer curve y = x.<br><br>
+      Outer radius R = x, &nbsp; Inner radius r = x&sup2;<br><br>
+      V = &pi; &int;<sub>0</sub><sup>1</sup> [x&sup2; &minus; x<sup>4</sup>] dx = &pi; [x&sup3;/3 &minus; x<sup>5</sup>/5]<sub>0</sub><sup>1</sup><br><br>
+      = &pi;(1/3 &minus; 1/5) = &pi;(2/15) = <strong>2&pi;/15</strong>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== PART A: MULTIPLE CHOICE ======================== -->
+<div class="section">
+  <div class="part-header">Part A: Multiple Choice (10 Questions)</div>
+
+  <!-- Q1 -->
+  <div class="question">
+    <div class="q-number">1. <span class="tag tag-inv-trig">Inverse Trig Derivative</span></div>
+    <div class="q-text">
+      Find d/dx [tan<sup>&minus;1</sup>(3x)].
+    </div>
+    <div class="choices">
+      <div class="choice">(A) &nbsp; 1/(1 + 9x&sup2;)</div>
+      <div class="choice">(B) &nbsp; 3/(1 + 9x&sup2;)</div>
+      <div class="choice">(C) &nbsp; 3/(1 + 3x&sup2;)</div>
+      <div class="choice">(D) &nbsp; &minus;3/(1 + 9x&sup2;)</div>
+      <div class="choice">(E) &nbsp; 1/(1 + 3x&sup2;)</div>
+    </div>
+    <button class="answer-btn" onclick="toggle(this)">Show Answer</button>
+    <div class="answer-content">
+      <div class="correct-answer">Answer: (B)</div>
+      d/dx [tan<sup>&minus;1</sup>(3x)] = 1/(1 + (3x)&sup2;) &middot; 3 = <strong>3/(1 + 9x&sup2;)</strong><br>
+      Don't forget the chain rule &mdash; multiply by the derivative of the inside.
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="question">
+    <div class="q-number">2. <span class="tag tag-integral">Inverse Trig Integral</span></div>
+    <div class="q-text">
+      Evaluate &int; dx/&radic;(9 &minus; x&sup2;).
+    </div>
+    <div class="choices">
+      <div class="choice">(A) &nbsp; sin<sup>&minus;1</sup>(x/3) + C</div>
+      <div class="choice">(B) &nbsp; sin<sup>&minus;1</sup>(3x) + C</div>
+      <div class="choice">(C) &nbsp; (1/3)sin<sup>&minus;1</sup>(x) + C</div>
+      <div class="choice">(D) &nbsp; tan<sup>&minus;1</sup>(x/3) + C</div>
+      <div class="choice">(E) &nbsp; cos<sup>&minus;1</sup>(x/3) + C</div>
+    </div>
+    <button class="answer-btn" onclick="toggle(this)">Show Answer</button>
+    <div class="answer-content">
+      <div class="correct-answer">Answer: (A)</div>
+      &int; dx/&radic;(a&sup2; &minus; x&sup2;) = sin<sup>&minus;1</sup>(x/a) + C.<br>
+      Here a = 3, so: <strong>sin<sup>&minus;1</sup>(x/3) + C</strong>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="question">
+    <div class="q-number">3. <span class="tag tag-inv-trig">Inverse Trig Derivative</span></div>
+    <div class="q-text">
+      Find d/dx [sin<sup>&minus;1</sup>(x&sup3;)].
+    </div>
+    <div class="choices">
+      <div class="choice">(A) &nbsp; 1/&radic;(1 &minus; x<sup>6</sup>)</div>
+      <div class="choice">(B) &nbsp; 3x&sup2;/&radic;(1 &minus; x&sup3;)</div>
+      <div class="choice">(C) &nbsp; 3x&sup2;/&radic;(1 &minus; x<sup>6</sup>)</div>
+      <div class="choice">(D) &nbsp; &minus;3x&sup2;/&radic;(1 &minus; x<sup>6</sup>)</div>
+      <div class="choice">(E) &nbsp; 3x&sup2;/(1 &minus; x<sup>6</sup>)</div>
+    </div>
+    <button class="answer-btn" onclick="toggle(this)">Show Answer</button>
+    <div class="answer-content">
+      <div class="correct-answer">Answer: (C)</div>
+      d/dx [sin<sup>&minus;1</sup>(x&sup3;)] = 1/&radic;(1 &minus; (x&sup3;)&sup2;) &middot; 3x&sup2; = <strong>3x&sup2;/&radic;(1 &minus; x<sup>6</sup>)</strong><br>
+      Remember: (x&sup3;)&sup2; = x<sup>6</sup>, not x&sup3;.
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="question">
+    <div class="q-number">4. <span class="tag tag-table">Inverse from Table</span></div>
+    <div class="q-text">
+      Let f be a differentiable function. Selected values are given below. If g is the inverse of f, find g'(7).
+    </div>
+    <table class="data-table">
+      <tr><th>x</th><td>1</td><td>3</td><td>5</td><td>7</td></tr>
+      <tr><th>f(x)</th><td>7</td><td>5</td><td>1</td><td>3</td></tr>
+      <tr><th>f'(x)</th><td>4</td><td>&minus;2</td><td>6</td><td>3</td></tr>
+    </table>
+    <div class="choices">
+      <div class="choice">(A) &nbsp; 1/4</div>
+      <div class="choice">(B) &nbsp; 4</div>
+      <div class="choice">(C) &nbsp; 1/3</div>
+      <div class="choice">(D) &nbsp; 3</div>
+      <div class="choice">(E) &nbsp; &minus;1/2</div>
+    </div>
+    <button class="answer-btn" onclick="toggle(this)">Show Answer</button>
+    <div class="answer-content">
+      <div class="correct-answer">Answer: (A)</div>
+      g'(7) = 1/f'(g(7)).<br>
+      g(7) = f<sup>&minus;1</sup>(7). From the table, f(1) = 7, so g(7) = 1.<br>
+      g'(7) = 1/f'(1) = <strong>1/4</strong>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="question">
+    <div class="q-number">5. <span class="tag tag-integral">Definite Integral</span></div>
+    <div class="q-text">
+      Evaluate &int;<sub>0</sub><sup>1</sup> dx/(1 + x&sup2;).
+    </div>
+    <div class="choices">
+      <div class="choice">(A) &nbsp; &pi;/2</div>
+      <div class="choice">(B) &nbsp; &pi;/4</div>
+      <div class="choice">(C) &nbsp; &pi;/3</div>
+      <div class="choice">(D) &nbsp; 1</div>
+      <div class="choice">(E) &nbsp; &pi;</div>
+    </div>
+    <button class="answer-btn" onclick="toggle(this)">Show Answer</button>
+    <div class="answer-content">
+      <div class="correct-answer">Answer: (B)</div>
+      &int; dx/(1 + x&sup2;) = tan<sup>&minus;1</sup>(x).<br>
+      [tan<sup>&minus;1</sup>(x)]<sub>0</sub><sup>1</sup> = tan<sup>&minus;1</sup>(1) &minus; tan<sup>&minus;1</sup>(0) = &pi;/4 &minus; 0 = <strong>&pi;/4</strong>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="question">
+    <div class="q-number">6. <span class="tag tag-inv-trig">Inverse Trig Derivative</span></div>
+    <div class="q-text">
+      Find d/dx [sec<sup>&minus;1</sup>(x)] evaluated at x = 2.
+    </div>
+    <div class="choices">
+      <div class="choice">(A) &nbsp; 1/&radic;3</div>
+      <div class="choice">(B) &nbsp; 2/&radic;3</div>
+      <div class="choice">(C) &nbsp; 1/(2&radic;3)</div>
+      <div class="choice">(D) &nbsp; &radic;3/2</div>
+      <div class="choice">(E) &nbsp; 1/2</div>
+    </div>
+    <button class="answer-btn" onclick="toggle(this)">Show Answer</button>
+    <div class="answer-content">
+      <div class="correct-answer">Answer: (C)</div>
+      d/dx [sec<sup>&minus;1</sup>(x)] = 1/(|x|&radic;(x&sup2; &minus; 1)).<br>
+      At x = 2: 1/(|2|&radic;(4 &minus; 1)) = 1/(2&radic;3) = <strong>1/(2&radic;3)</strong>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="question">
+    <div class="q-number">7. <span class="tag tag-integral">U-Sub + Inverse Trig</span></div>
+    <div class="q-text">
+      Evaluate &int; 6x/(1 + 9x<sup>4</sup>) dx.
+    </div>
+    <div class="choices">
+      <div class="choice">(A) &nbsp; tan<sup>&minus;1</sup>(3x&sup2;) + C</div>
+      <div class="choice">(B) &nbsp; (1/3)tan<sup>&minus;1</sup>(3x&sup2;) + C</div>
+      <div class="choice">(C) &nbsp; 3tan<sup>&minus;1</sup>(x&sup2;) + C</div>
+      <div class="choice">(D) &nbsp; sin<sup>&minus;1</sup>(3x&sup2;) + C</div>
+      <div class="choice">(E) &nbsp; (1/9)tan<sup>&minus;1</sup>(3x&sup2;) + C</div>
+    </div>
+    <button class="answer-btn" onclick="toggle(this)">Show Answer</button>
+    <div class="answer-content">
+      <div class="correct-answer">Answer: (A)</div>
+      Let u = 3x&sup2;, then du = 6x dx.<br>
+      Rewrite: 1 + 9x<sup>4</sup> = 1 + (3x&sup2;)&sup2; = 1 + u&sup2;.<br>
+      &int; du/(1 + u&sup2;) = tan<sup>&minus;1</sup>(u) + C = <strong>tan<sup>&minus;1</sup>(3x&sup2;) + C</strong>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="question">
+    <div class="q-number">8. <span class="tag tag-inv-trig">Product Rule + Inverse Trig</span></div>
+    <div class="q-text">
+      Find d/dx [x &middot; sin<sup>&minus;1</sup>(x)].
+    </div>
+    <div class="choices">
+      <div class="choice">(A) &nbsp; x/&radic;(1 &minus; x&sup2;)</div>
+      <div class="choice">(B) &nbsp; sin<sup>&minus;1</sup>(x) + x/&radic;(1 &minus; x&sup2;)</div>
+      <div class="choice">(C) &nbsp; sin<sup>&minus;1</sup>(x) &minus; x/&radic;(1 &minus; x&sup2;)</div>
+      <div class="choice">(D) &nbsp; 1/&radic;(1 &minus; x&sup2;)</div>
+      <div class="choice">(E) &nbsp; sin<sup>&minus;1</sup>(x) + 1/&radic;(1 &minus; x&sup2;)</div>
+    </div>
+    <button class="answer-btn" onclick="toggle(this)">Show Answer</button>
+    <div class="answer-content">
+      <div class="correct-answer">Answer: (B)</div>
+      Product rule: (x)' &middot; sin<sup>&minus;1</sup>(x) + x &middot; (sin<sup>&minus;1</sup>(x))'<br>
+      = 1 &middot; sin<sup>&minus;1</sup>(x) + x &middot; 1/&radic;(1 &minus; x&sup2;)<br>
+      = <strong>sin<sup>&minus;1</sup>(x) + x/&radic;(1 &minus; x&sup2;)</strong>
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="question">
+    <div class="q-number">9. <span class="tag tag-integral">Inverse Trig Integral</span></div>
+    <div class="q-text">
+      Evaluate &int; dx/&radic;(5 &minus; x&sup2;).
+    </div>
+    <div class="choices">
+      <div class="choice">(A) &nbsp; sin<sup>&minus;1</sup>(x/5) + C</div>
+      <div class="choice">(B) &nbsp; sin<sup>&minus;1</sup>(x/&radic;5) + C</div>
+      <div class="choice">(C) &nbsp; (1/&radic;5)sin<sup>&minus;1</sup>(x) + C</div>
+      <div class="choice">(D) &nbsp; tan<sup>&minus;1</sup>(x/&radic;5) + C</div>
+      <div class="choice">(E) &nbsp; &radic;5 &middot; sin<sup>&minus;1</sup>(x) + C</div>
+    </div>
+    <button class="answer-btn" onclick="toggle(this)">Show Answer</button>
+    <div class="answer-content">
+      <div class="correct-answer">Answer: (B)</div>
+      &int; dx/&radic;(a&sup2; &minus; x&sup2;) = sin<sup>&minus;1</sup>(x/a) + C.<br>
+      Here a&sup2; = 5 so a = &radic;5: <strong>sin<sup>&minus;1</sup>(x/&radic;5) + C</strong><br>
+      Common mistake: using a&sup2; instead of a. It's x/&radic;5, not x/5.
+    </div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="question">
+    <div class="q-number">10. <span class="tag tag-table">Inverse from Table</span></div>
+    <div class="q-text">
+      The table below gives values of a differentiable function f and its derivative. If g(x) = f<sup>&minus;1</sup>(x), find the equation of the tangent line to g at x = 2.
+    </div>
+    <table class="data-table">
+      <tr><th>x</th><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+      <tr><th>f(x)</th><td>4</td><td>2</td><td>1</td><td>3</td></tr>
+      <tr><th>f'(x)</th><td>&minus;3</td><td>5</td><td>&minus;1</td><td>2</td></tr>
+    </table>
+    <div class="choices">
+      <div class="choice">(A) &nbsp; y &minus; 2 = (1/5)(x &minus; 2)</div>
+      <div class="choice">(B) &nbsp; y &minus; 2 = 5(x &minus; 2)</div>
+      <div class="choice">(C) &nbsp; y &minus; 1 = (1/5)(x &minus; 2)</div>
+      <div class="choice">(D) &nbsp; y &minus; 2 = &minus;(x &minus; 2)</div>
+      <div class="choice">(E) &nbsp; y &minus; 3 = (1/2)(x &minus; 2)</div>
+    </div>
+    <button class="answer-btn" onclick="toggle(this)">Show Answer</button>
+    <div class="answer-content">
+      <div class="correct-answer">Answer: (A)</div>
+      <strong>Point:</strong> g(2) = f<sup>&minus;1</sup>(2). From table, f(2) = 2, so g(2) = 2. Point is (2, 2).<br><br>
+      <strong>Slope:</strong> g'(2) = 1/f'(g(2)) = 1/f'(2) = 1/5.<br><br>
+      Tangent line: <strong>y &minus; 2 = (1/5)(x &minus; 2)</strong>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== PART B: FREE RESPONSE ======================== -->
+<div class="section">
+  <div class="part-header">Part B: Free Response (5 Questions)</div>
+
+  <!-- FR1 -->
+  <div class="question">
+    <div class="q-number">11. <span class="tag tag-table">Inverse from Table</span></div>
+    <div class="q-text">
+      Let f be a differentiable, one-to-one function. Selected values are shown below. Let g = f<sup>&minus;1</sup>.
+    </div>
+    <table class="data-table">
+      <tr><th>x</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+      <tr><th>f(x)</th><td>3</td><td>4</td><td>0</td><td>2</td><td>1</td></tr>
+      <tr><th>f'(x)</th><td>&minus;1</td><td>6</td><td>3</td><td>&minus;4</td><td>2</td></tr>
+    </table>
+    <div class="q-text">
+      (a) Find g'(4).<br>
+      (b) Find g'(0).<br>
+      (c) Write the equation of the tangent line to y = g(x) at x = 3.
+    </div>
+    <div class="fr-workspace">Show all work...</div>
+    <button class="answer-btn" onclick="toggle(this)">Show Answer</button>
+    <div class="answer-content">
+      <div class="correct-answer">Answers below:</div>
+      <strong>(a)</strong> g(4) = f<sup>&minus;1</sup>(4). f(1) = 4, so g(4) = 1.<br>
+      g'(4) = 1/f'(g(4)) = 1/f'(1) = <strong>1/6</strong><br><br>
+
+      <strong>(b)</strong> g(0) = f<sup>&minus;1</sup>(0). f(2) = 0, so g(0) = 2.<br>
+      g'(0) = 1/f'(g(0)) = 1/f'(2) = <strong>1/3</strong><br><br>
+
+      <strong>(c)</strong> At x = 3: g(3) = f<sup>&minus;1</sup>(3). f(0) = 3, so g(3) = 0. Point: (3, 0).<br>
+      Slope: g'(3) = 1/f'(g(3)) = 1/f'(0) = 1/(&minus;1) = &minus;1.<br>
+      Tangent line: <strong>y = &minus;(x &minus; 3) &nbsp; or &nbsp; y = &minus;x + 3</strong>
+    </div>
+  </div>
+
+  <!-- FR2 -->
+  <div class="question">
+    <div class="q-number">12. <span class="tag tag-integral">Completing the Square + Inverse Trig</span></div>
+    <div class="q-text">
+      Evaluate &int; dx/(x&sup2; + 6x + 13).
+    </div>
+    <div class="fr-workspace">Show all work...</div>
+    <button class="answer-btn" onclick="toggle(this)">Show Answer</button>
+    <div class="answer-content">
+      <div class="correct-answer">Answer: (1/2)tan<sup>&minus;1</sup>((x + 3)/2) + C</div>
+      <strong>Step 1:</strong> Complete the square.<br>
+      x&sup2; + 6x + 13 = (x&sup2; + 6x + 9) + 4 = (x + 3)&sup2; + 4<br><br>
+      <strong>Step 2:</strong> Recognize the form &int; du/(u&sup2; + a&sup2;) = (1/a)tan<sup>&minus;1</sup>(u/a) + C.<br>
+      u = x + 3, a = 2.<br><br>
+      <strong>Answer:</strong> <strong>(1/2)tan<sup>&minus;1</sup>((x + 3)/2) + C</strong>
+    </div>
+  </div>
+
+  <!-- FR3 - DISK -->
+  <div class="question">
+    <div class="q-number">13. <span class="tag tag-disk">Disk Method</span></div>
+    <div class="q-text">
+      The region bounded by y = &radic;(x + 1), y = 0, x = 0, and x = 3 is rotated about the x-axis. Find the volume of the resulting solid.
+    </div>
+    <div class="fr-workspace">Show all work...</div>
+    <button class="answer-btn" onclick="toggle(this)">Show Answer</button>
+    <div class="answer-content">
+      <div class="correct-answer">V = 15&pi;/2</div>
+      <strong>Disk method:</strong> Region touches the x-axis. Radius = &radic;(x + 1).<br><br>
+      V = &pi; &int;<sub>0</sub><sup>3</sup> [&radic;(x + 1)]&sup2; dx = &pi; &int;<sub>0</sub><sup>3</sup> (x + 1) dx<br><br>
+      = &pi; [x&sup2;/2 + x]<sub>0</sub><sup>3</sup> = &pi;(9/2 + 3) = &pi;(15/2) = <strong>15&pi;/2</strong>
+    </div>
+  </div>
+
+  <!-- FR4 - WASHER -->
+  <div class="question">
+    <div class="q-number">14. <span class="tag tag-washer">Washer Method</span></div>
+    <div class="q-text">
+      The region bounded by y = x + 2 and y = x&sup2; is rotated about the x-axis. Find the volume of the resulting solid.
+    </div>
+    <div class="fr-workspace">Show all work...</div>
+    <button class="answer-btn" onclick="toggle(this)">Show Answer</button>
+    <div class="answer-content">
+      <div class="correct-answer">V = 72&pi;/5</div>
+      <strong>Step 1:</strong> Find intersections. x + 2 = x&sup2; &rarr; x&sup2; &minus; x &minus; 2 = 0 &rarr; (x &minus; 2)(x + 1) = 0.<br>
+      x = &minus;1 and x = 2.<br><br>
+      <strong>Step 2:</strong> Identify radii. On [&minus;1, 2], x + 2 > x&sup2;.<br>
+      Outer: R = x + 2, &nbsp; Inner: r = x&sup2;.<br><br>
+      <strong>Step 3:</strong> Set up and integrate.<br>
+      V = &pi; &int;<sub>&minus;1</sub><sup>2</sup> [(x + 2)&sup2; &minus; (x&sup2;)&sup2;] dx<br>
+      = &pi; &int;<sub>&minus;1</sub><sup>2</sup> [(x&sup2; + 4x + 4) &minus; x<sup>4</sup>] dx<br>
+      = &pi; [x&sup3;/3 + 2x&sup2; + 4x &minus; x<sup>5</sup>/5]<sub>&minus;1</sub><sup>2</sup><br><br>
+      At x = 2: 8/3 + 8 + 8 &minus; 32/5 = 40/15 + 240/15 &minus; 96/15 = 184/15<br>
+      At x = &minus;1: &minus;1/3 + 2 &minus; 4 + 1/5 = &minus;5/15 &minus; 30/15 + 3/15 = &minus;32/15<br><br>
+      V = &pi;(184/15 &minus; (&minus;32/15)) = &pi;(216/15) = <strong>72&pi;/5</strong>
+    </div>
+  </div>
+
+  <!-- FR5 -->
+  <div class="question">
+    <div class="q-number">15. <span class="tag tag-inv-trig">Inverse Trig Application</span></div>
+    <div class="q-text">
+      Let g(x) = tan<sup>&minus;1</sup>(x&sup2; &minus; 1).<br><br>
+      (a) Find g'(x).<br>
+      (b) Find the equation of the tangent line to y = g(x) at x = 1.<br>
+      (c) Is g concave up or concave down at x = 1? Justify.
+    </div>
+    <div class="fr-workspace">Show all work...</div>
+    <button class="answer-btn" onclick="toggle(this)">Show Answer</button>
+    <div class="answer-content">
+      <div class="correct-answer">Answers below:</div>
+      <strong>(a)</strong> g'(x) = 1/(1 + (x&sup2; &minus; 1)&sup2;) &middot; 2x = <strong>2x / (1 + (x&sup2; &minus; 1)&sup2;)</strong><br>
+      Can expand denominator: 1 + x<sup>4</sup> &minus; 2x&sup2; + 1 = x<sup>4</sup> &minus; 2x&sup2; + 2.<br>
+      So g'(x) = 2x/(x<sup>4</sup> &minus; 2x&sup2; + 2).<br><br>
+
+      <strong>(b)</strong> g(1) = tan<sup>&minus;1</sup>(1 &minus; 1) = tan<sup>&minus;1</sup>(0) = 0. Point: (1, 0).<br>
+      g'(1) = 2(1)/(1 &minus; 2 + 2) = 2/1 = 2.<br>
+      Tangent line: <strong>y = 2(x &minus; 1) &nbsp; or &nbsp; y = 2x &minus; 2</strong><br><br>
+
+      <strong>(c)</strong> Need g''(1). Using quotient rule on g'(x) = 2x/(x<sup>4</sup> &minus; 2x&sup2; + 2):<br>
+      Numerator of g'': 2(x<sup>4</sup> &minus; 2x&sup2; + 2) &minus; 2x(4x&sup3; &minus; 4x) = 2x<sup>4</sup> &minus; 4x&sup2; + 4 &minus; 8x<sup>4</sup> + 8x&sup2; = &minus;6x<sup>4</sup> + 4x&sup2; + 4.<br>
+      At x = 1: &minus;6 + 4 + 4 = 2 > 0. Denominator is positive.<br>
+      g''(1) > 0, so <strong>g is concave up at x = 1</strong>.
+    </div>
+  </div>
+
+</div>
+
+<!-- ======================== SCORE ======================== -->
+<div class="section">
+  <h2>Score Tracker</h2>
+  <div class="score-box">
+    <span>MC: </span><input type="text" id="mc-score" maxlength="2"> <span> / 10 &nbsp;&nbsp;&nbsp; FR: </span><input type="text" id="fr-score" maxlength="2"> <span> / 5</span>
+  </div>
+</div>
+
+</div>
+
+<script>
+function toggle(btn) {
+  const content = btn.nextElementSibling;
+  content.classList.toggle('visible');
+  btn.textContent = content.classList.contains('visible') ? 'Hide Answer' : 'Show Answer';
+}
+</script>
+</body>
+</html>
